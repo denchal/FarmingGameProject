@@ -6,6 +6,16 @@ using UnityEngine;
 public class MainScript : MonoBehaviour
 {
     public static int plotsBuilt = 0;
+    public GameObject menuPanel;
+    public class plantInfo {
+        public string name;
+        public float time;
+
+        public plantInfo(string name, float time) {
+            this.name = name;
+            this.time = time;
+        }
+    }
     public static int PlantNameToInt(string plantName) {
         switch (plantName) {
             case "Wheat": return 0;
@@ -62,6 +72,11 @@ public class MainScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown("escape"))
+        {
+            menuPanel.GetComponent<CanvasGroup>().alpha = 1;
+            menuPanel.GetComponent<CanvasGroup>().interactable = true;
+            menuPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        }
     }
 }

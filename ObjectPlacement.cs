@@ -40,6 +40,7 @@ public class ObjectPlacement : MonoBehaviour
                 Instantiate(prefab, point, Quaternion.identity);
                 Instantiate(soil, point, Quaternion.identity);
                 GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().goldAmount -= (int) Math.Pow(10, MainScript.plotsBuilt + 1);
+                GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().plotPositions.Add(point);
                 MainScript.plotsBuilt += 1;
             }
             else {
@@ -47,7 +48,8 @@ public class ObjectPlacement : MonoBehaviour
                 int inventoryAmount = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().PlantAmounts[GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().currentSlot];
                 if (plantHelper.GetComponent<PlantingScript>().canPlant && plantHelper.GetComponent<PlantingScript>().inPlantMode && inventoryAmount > 0) {
                     GameObject planted = Instantiate(plant, plantHelper.GetComponent<PlantingScript>().soil.transform.position, plant.GetComponent<Transform>().rotation);
-                    plantHelper.GetComponent<PlantingScript>().soil.GetComponent<SoilBehaviour>().contains = planted;
+                    plantHelper.GetComponent<PlantingScript>().soil.GetComponent<SoilBehaviour>().contains = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().PlantTypes[GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().currentSlot];
+                    plantHelper.GetComponent<PlantingScript>().soil.GetComponent<SoilBehaviour>().containsGO = planted;
                     plantHelper.GetComponent<PlantingScript>().soil.GetComponent<SoilBehaviour>().isEmpty = false;
                     planted.GetComponent<PlantBehaviour>().type = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().PlantTypes[GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().currentSlot];
                     GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().PlantAmounts[GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().currentSlot] -= 1;

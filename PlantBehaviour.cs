@@ -25,6 +25,7 @@ public class PlantBehaviour : MonoBehaviour
             if (this.GetComponent<Collider>().bounds.Contains(GameObject.FindGameObjectWithTag("Ground").GetComponent<ObjectPlacement>().plantPoint)) {
                 Destroy(this.gameObject);
                 GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().PlantAmounts[MainScript.PlantNameToInt(type)] += 2;
+                
             }
         }
     }

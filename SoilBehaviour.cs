@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class SoilBehaviour : MonoBehaviour
 {
-    public GameObject contains;
+    public string contains;
     public bool isEmpty = true;
+    public GameObject containsGO;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,8 +16,9 @@ public class SoilBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (contains == null) {
+        if (containsGO == null) {
             isEmpty = true;
+            contains = "";
         }
     }
 }
